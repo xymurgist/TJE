@@ -1,25 +1,24 @@
+from sqlalchemy import insert
 from sqlalchemy.orm import Session
 from db_engine import engine as engine
-from db_schema_za4_blog import Blog as Blog
-from za4_blog_class import Blog as blog_props
+from db_schema_za4_blog import ZA4BlogBase as ZA4BlogBase
+
+from datetime import date
+
+today = date.today()
+full_today = today.strftime("%B %d, %Y")
 
 
-# Insert data into table
-with Session(engine) as session:
-    for prop in blog_props.set_blog_props():
-        blog_posts = Blog(
-            date=prop.date,
-            author=prop.author,
-            title = prop.title,
-            subtitle=prop.subtitle,
-            img_url = prop.img_url,
-            body=prop.body,
-        )
-
-        session.add_all([blog_posts])
+def insert_post(form):
+    with Session(engine) as session:
+        for key in form:
+            blog_post = {
+                'date': full_today,
+                'author': form["author"],
+                'title': form["title"],
+                'subtitle': form["subtitle"],
+                'img_url': form["img_url"],
+                'body': form["body"],
+            }
+        session.execute(insert(ZA4BlogBase), blog_post)
         session.commit()
-
-
-# might need to switch to this to insert from forms
-# from sqlalchemy import insert
-    # session.execute()

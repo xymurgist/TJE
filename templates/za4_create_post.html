@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap5/form.html" as wtf %}
 
 {% block head %}
 <meta name="description" content="This is the Homepage">
@@ -14,7 +14,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             {{ ckeditor.load() }}
             {{ ckeditor.config(name='body') }}
-            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+            {{ wtf.render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
         </div>
     </div>
 </div>

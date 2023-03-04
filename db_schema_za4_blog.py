@@ -1,4 +1,3 @@
-# from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from db_engine import engine as engine
 
@@ -8,7 +7,7 @@ class Base(DeclarativeBase):
     pass
 
 
-class Blog(Base):
+class ZA4BlogBase(Base):
     """Maps the Blog table's columns for use by Base to create the table and columns in the database"""
     __tablename__ = "za4_blog"
 
