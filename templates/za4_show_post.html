@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="description" content="SAS:ZA4 Post">
+<meta name="keywords" content="SAS, ZA4, post">
+{% endblock %}
+
+{% block title %}SAS:ZA4 Post{% endblock %}
+
+{% block content %}
+<!-- Post Content-->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p>
+                    {{post.body|safe}}
+                </p>
+                <hr>
+                <div class="clearfix">
+                    <!--{# <a class="btn btn-primary float-right" href="{{url_for('za4_edit_post', post_id=post.id)}}">Edit Post</a> #}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock content %}

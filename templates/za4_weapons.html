@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="description" content="SAS:ZA4 Weapons">
+<meta name="keywords" content="SAS, ZA4, weapons, zombies">
+{% endblock %}
+
+{% block title %}SAS:ZA4 Weapons{% endblock %}
+
+{% block content %}
+<div>SAS ZA4 Webpage</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Weapon Name</th>
+        <th>Manufacturer</th>
+        <th>Class</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for prop in props %}
+        <tr>
+            <td>{{prop.weapon_name}}</td>
+            <td>{{prop.manufacturer}}</td>
+            <td>{{prop.weapon_class}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td>Weapon Name</td>
+        <td>Manufacturer</td>
+        <td>Class</td>
+    </tr>
+    </tfoot>
+</table>
+{% endblock %}

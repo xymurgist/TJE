@@ -1,0 +1,58 @@
+<!--Header-->
+{% if request.path == "/" %}
+    {% set header_img = "static/assets/img/home-bg.jpg" %}
+    {% set class_heading = 'site-heading' %}
+    {% set title = 'Total Jim Experience' %}
+    {% set subtitle = 'Home Page' %}
+{% endif %}
+{% if request.path == "/about" %}
+    {% set header_img = "static/assets/img/about-bg.jpg" %}
+    {% set class_heading = 'page-heading' %}
+    {% set title = 'About Me' %}
+    {% set subtitle = 'About Page' %}
+{% endif %}
+{% if request.path == "/contact" %}
+    {% set header_img = "static/assets/img/contact-bg.jpg" %}
+    {% set class_heading = 'page-heading' %}
+    {% set title = 'Contact Me' %}
+    {% set subtitle = 'Contact Page' %}
+{% endif %}
+{% if request.path == "/za4_create_post" %}
+    {% set header_img = "static/assets/img/edit-bg.jpg" %}
+    {% set class_heading = 'page-heading' %}
+    {% set title = 'Create Post' %}
+    {% set subtitle = 'Make a great post!' %}
+{% endif %}
+
+{% if "/za4_post" in request.url %}
+<header class="masthead" style="background-image: url( {{ url_for('static', filename='assets/img/post-bg.jpg') }} )">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{post.title}}</h1>
+                    <h2 class="subheading">{{post.subtitle}}</h2>
+                    <span class="meta">
+                        Posted by {{post.author}}
+                        <a href="#!">Start Bootstrap</a>
+                        on {{post.date}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% else %}
+<header class="masthead" style="background-image: url('{{header_img}}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="{{class_heading}}">
+                    <h1>{{title}}</h1>
+                    <span class="subheading">{{subtitle}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}

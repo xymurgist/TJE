@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="description" content="This is the Homepage">
+<meta name="keywords" content="TJE, Total Jim Experience, homepage, welcome">
+{% endblock head %}
+
+{% block title %}Welcome to Total Jim Experience{% endblock title %}
+
+{% block content %}
+<div>Welcome to Total Jim Experience</div>
+<br />
+<div><a href="{{ url_for('za4_weapons') }}">SAS ZA4 Weapons</a></div>
+<div><a href="{{ url_for('za4_blog') }}">SAS ZA4 Blog</a></div>
+{% endblock content %}
