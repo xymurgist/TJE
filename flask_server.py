@@ -9,7 +9,7 @@ import datetime as dt
 
 from db_select_za4_weapons import select_za4_weapons
 from db_select_za4_blog import select_za4_blog
-from db_insert_za4_blog import insert_post
+from db_insert_za4_blog import insert_post, update_post, delete_post
 
 
 # Variables
@@ -62,12 +62,12 @@ def za4_blog():
     return render_template("za4_blog.html", posts=blog_posts, year=year)
 
 
-@app.route('/za4_show_post/<int:id>')
-def za4_show_post(id):
+@app.route('/za4_show_post/<int:post_id>')
+def za4_show_post(post_id):
     requested_post = None
     blog_posts = select_za4_blog()
     for post in blog_posts:
-        if post.id == id:
+        if post.id == post_id:
             requested_post = post
     return render_template("za4_show_post.html", post=requested_post, year=year)
 
@@ -81,13 +81,34 @@ def za4_create_post():
     return render_template("za4_create_post.html", form=form, year=year)
 
 
-# @app.route('/za4_edit_post/<int:id>')
-# def za4_edit_post(id):
-#     requested_post = None
-#     for post in posts_list:
-#         if post["id"] == id:
-#             requested_post = post
-#     return render_template("za4_post.html", post=requested_post, post_id=post["id"], year=year)
+@app.route('/za4_edit_post/<int:post_id>', methods=["GET", "POST"])
+def za4_edit_post(post_id):
+    requested_post = None
+    blog_posts = select_za4_blog()
+    for post in blog_posts:
+        if post.id == post_id:
+            requested_post = post
+
+    form = CreatePostForm(
+        title=requested_post.title,
+        subtitle=requested_post.subtitle,
+        img_url=requested_post.img_url,
+        author=requested_post.author,
+        body=requested_post.body
+    )
+
+    if form.validate_on_submit():
+        update_post(form.data)
+        return redirect(url_for('za4_show_post', post_id=post.id))
+    
+    return render_template("za4_create_post.html", post=requested_post, form=form, is_edit=True, year=year)
+
+
+@app.route('/za4_delete/<int:post_id>')
+def za4_delete_post(post_id):
+    delete_post(post_id)
+    return redirect(url_for('za4_blog'))
+    
 
 
 if __name__ == "__main__":

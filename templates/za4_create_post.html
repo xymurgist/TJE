@@ -2,11 +2,25 @@
 {% import "bootstrap5/form.html" as wtf %}
 
 {% block head %}
-<meta name="description" content="This is the Homepage">
-<meta name="keywords" content="TJE, Total Jim Experience, homepage, welcome">
+{% if is_edit %}
+    <meta name="description" content="Edit a Post">
+    <meta name="keywords" content="TJE, Total Jim Experience, edit">
+{% else %}
+    <meta name="description" content="Create a Post">
+    <meta name="keywords" content="TJE, Total Jim Experience, create">
+{% endif %}
 {% endblock head %}
 
-{% block title %}TJE: Create Your Post{% endblock title %}
+{% block title %}
+{% if is_edit %}
+    TJE: Edit Your Post
+{% else %}
+    TJE: Create Your Post
+{% endif %}
+{% endblock title %}
+
+
+
 
 {% block content %}
 <div class="container">
